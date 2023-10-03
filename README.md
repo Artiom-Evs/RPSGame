@@ -34,13 +34,13 @@
 
 Интерфейсы:
 1. IKeyGenerator
-2. IEncryptor
+2. IDataSigner
 
 Классы:
 1. TUI
-2. PlayContext
+2. GameContext
 3. BaseKeyGenerator
-4. Sha3Encryptor
+4. HMACSHA3DataSigner
 
 Перечисления:
 1. MoveResults
