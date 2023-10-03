@@ -6,4 +6,5 @@ namespace RPSGame.Services;
 /// </summary>
 internal interface IKeyGenerator
 {
+    string GenerateKey(int length);
 }

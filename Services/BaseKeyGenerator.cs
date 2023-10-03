@@ -1,4 +1,6 @@
 ﻿
+using System.Security.Cryptography;
+
 namespace RPSGame.Services;
 
 /// <summary>
@@ -6,4 +8,6 @@ namespace RPSGame.Services;
 /// </summary>
 internal class BaseKeyGenerator : IKeyGenerator
 {
+    public string GenerateKey(int length) =>
+        Convert.ToBase64String(RandomNumberGenerator.GetBytes(length * 2));
 }
