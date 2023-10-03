@@ -1,4 +1,6 @@
 ﻿
+using RPSGame.Models;
+
 namespace RPSGame.Services;
 
 /// <summary>
@@ -6,4 +8,5 @@ namespace RPSGame.Services;
 /// </summary>
 internal interface IDataSigner
 {
+    SigningResult SignString(string data);
 }
