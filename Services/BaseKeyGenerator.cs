@@ -9,5 +9,5 @@ namespace RPSGame.Services;
 internal class BaseKeyGenerator : IKeyGenerator
 {
     public string GenerateKey(int length) =>
-        Convert.ToBase64String(RandomNumberGenerator.GetBytes(length * 2));
+        Convert.ToBase64String(RandomNumberGenerator.GetBytes(length));
 }
