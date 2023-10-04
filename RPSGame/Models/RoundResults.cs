@@ -1,7 +1,7 @@
 ﻿
 namespace RPSGame.Models;
 
-internal enum RoundResults
+public enum RoundResults
 {
     Draw = 1,
     PCWin,

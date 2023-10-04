@@ -3,7 +3,7 @@ using RPSGame.Models;
 
 namespace RPSGame.Infrastructure;
 
-internal static class ChoiceComparer
+public static class ChoiceComparer
 {
     public static RoundResults Compare(int pcChoice, int playerChoice, int choicesCount)
     {
