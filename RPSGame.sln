@@ -5,7 +5,12 @@ VisualStudioVersion = 17.8.34112.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSGame", "RPSGame\RPSGame.csproj", "{F2F0FB22-123E-4302-9C23-AA56A2775723}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPSGame.Tests", "RPSGame.Tests\RPSGame.Tests.csproj", "{0D454B57-65F9-43E3-B362-9BFDD99F9060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPSGame.Tests", "RPSGame.Tests\RPSGame.Tests.csproj", "{0D454B57-65F9-43E3-B362-9BFDD99F9060}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{40900338-9E07-4F32-AAE2-5B9451CC69A9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

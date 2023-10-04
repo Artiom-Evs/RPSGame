@@ -1,46 +1,48 @@
 # RPSGame #
 
-## Описание #
+## Overview #
 
-Консольная игра на подобии Камень-Ножницы-Бумага с возможностью выбора вариантов ходов и криптографическим подтверждением хода компьютера. Разрабатывается как задание на учебных курсах компании Itransition.
+Console game similar to Rock-Scissors-Paper with configurable moves functionality and cryptographic confirmation of the PC's moves. 
+Develops as a task project for an internship of the Itransition company .
 
-## Выжимка требований #
+## Reduction of requirements #
 
-Реализовать консольную игру на подобии Камень-Ножницы-Бумага.
+Develop console game similar to Rock-Slicers-Paper.
 
-Позволяет играть с компьютером в игру Камень-Ножницы-Бумага с опциональными вариантами ходов.
+Allows to play the game Rock-Slicers-Paper with PC with configurable move variants. 
 
-Функциональные требования: 
-1. Варианты ходов передаются как аргументы командной строки. 
-2. Количество вариантов ходов должно быть не чётным и большим или равным трём. 
-3. Победа или поражение определяется порядком аргументов при запуске программы: следующая половина вариантов выигрывает у выбранного, предыдущая половина - проигрывает. 
-4. при совершении хода пользователю предлагается список с вариантами ходов, предложением сдачи и вызова справки. 
-5. Ход компьютера подтверждается криптографической подписью: компьютер генерирует секретный ключ, вычисляет подпись для своего хода и показывает её пользователю. После хода пользователя ему показывается приватный ключ. Это позволяет пользователю убедиться в отсутствии подмены хода компьютера.  
-6. Интерфейс должен быть реализован на английском языке.
+Functional requirements: 
+1. Move variants are configured as a command line arguments.
+2. Number of the move variants must be odd and more or equal three.
+3. Move variants cannot be duplicated.
+4. Victory or defeat is computed by sequence of a command line arguments: next half of move variants loses current move variant, and previous half wins current move variant.
+5. Player is asked to choose move variant, exit or help during his move. 
+6. PC's move confirms by cryptographic sign: PC generates secret key, computes signature for his move and shows signature to player. PC shows secret key after player's move. It is allows to make sure that the PC is not change his move variant.
+7. User interface must be in English.
 
-Нефункциональные требования: 
-1. Криптографическая подпись вычисляется по алгоритму HMAC на основе SHA2 или SHA3.
-2. Длинна секретного ключа не менее 256 бит. 
+Non-functional requirements: 
+1. Cryptographic signature must be computed by HMAC SHA2 or SHA3 algorithm.
+2. Secret key length must be more or equal 256 bits. 
 
-## Структура проекта #
+## Project structure #
 
-Логические сущности:
+Logic entities:
 1. TUI
-2. Контекст игры
-3. Шифратор
-4. Генератор ключа
+2. game context
+3. Data signer
+4. Key generator
 
-Программные сущности:
+Program entities:
 
-Интерфейсы:
+Interfaces:
 1. IKeyGenerator
 2. IDataSigner
 
-Классы:
+Classes:
 1. TUI
 2. GameContext
 3. BaseKeyGenerator
-4. HMACSHA3DataSigner
+4. HMACSHA2DataSigner
 
-Перечисления:
-1. MoveResults
+Enums:
+1. RoundResults
