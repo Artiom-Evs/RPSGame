@@ -11,10 +11,17 @@ internal static class ChoiceComparer
         {
             return RoundResults.Draw;
         }
-        else if (pcChoice < playerChoice && (playerChoice - pcChoice) / (choicesCount / 2) < 2)
+        // check distance between elements. 
+        // if distance equal or less then half of the elements count
+        else if (pcChoice < playerChoice && playerChoice - pcChoice <= choicesCount / 2)
         {
             return RoundResults.PCWin;
         }
+        // if first element more then second, use inverted logic
+        else if (pcChoice > playerChoice && pcChoice - playerChoice > choicesCount / 2)
+        {
+            return RoundResults.PCWin;
+        }       
 
         return RoundResults.PlayerWin;
     }
