@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RPSGame": {
+      "commandName": "Project",
+      "commandLineArgs": "Rock Paper Scissors Putin Banana"
+    }
+  }
+}
