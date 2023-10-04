@@ -27,6 +27,12 @@ internal static class Program
             return;
         }
 
+        if (new HashSet<string>(args).Count != args.Length)
+        {
+            TUI.PrintArgumentsDuplicatedError();
+            return;
+        }
+
         IKeyGenerator keyGenerator = new BaseKeyGenerator();
         IDataSigner dataSigner = new HMACSHA2DataSigner(keyGenerator);
 

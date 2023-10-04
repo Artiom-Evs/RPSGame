@@ -19,6 +19,8 @@ internal static class TUI
     internal static void PrintNumberOfArgumentsIsNotOddError() =>
         Console.WriteLine("The number of start arguments must be odd.\nBye!");
 
+    internal static void PrintArgumentsDuplicatedError() =>
+        Console.WriteLine("Arguments cannot be duplicated.\nBye!");
 
     internal static void PrintGameStartMessage() =>
         AnsiConsole.Write(new Markup("[Yellow]Welcome to Rock-Paper-Scissors like game![/]\n\n"));
