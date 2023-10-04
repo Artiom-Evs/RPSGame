@@ -7,11 +7,11 @@ namespace RPSGame.Services;
 /// <summary>
 /// Provides a data signing functionality. Signing is based on HMAC SHA3-256 algorithm.
 /// </summary>
-internal class HMACSHA3DataSigner : IDataSigner
+internal class HMACSHA2DataSigner : IDataSigner
 {
     private readonly IKeyGenerator _keyGenerator;
 
-    public HMACSHA3DataSigner(IKeyGenerator keyGenerator)
+    public HMACSHA2DataSigner(IKeyGenerator keyGenerator)
     {
         _keyGenerator = keyGenerator;
     }
@@ -22,7 +22,7 @@ internal class HMACSHA3DataSigner : IDataSigner
         byte[] secretKey = Convert.FromBase64String(keyString);
         byte[] dataBytes = Convert.FromBase64String(data);
 
-        using HMACSHA3_256 hasher = new(secretKey);
+        using HMACSHA256 hasher = new(secretKey);
 
         byte[] signature = hasher.ComputeHash(dataBytes);
         string signatureString = Convert.ToBase64String(signature);
