@@ -43,13 +43,14 @@ internal class GameContext
         do
         {
             this.RoundStarted?.Invoke(this, new RoundStartedEventArgs(roundNumber++));
-
             this.PCMoveStarted?.Invoke(this, new PCMoveStartedEventArgs());
+            
             int pcChoice = _pcMoveHandler(_moveVariants);
             var signResult = _dataSigner.SignString(_moveVariants[pcChoice]);
+            
             this.PCMoveEnded?.Invoke(this, new PCMoveEndedEventArgs(signResult.Signature));
-
             this.PlayerMoveStarted?.Invoke(this, new PlayerMoveStartedEventArgs());
+            
             int playerChoice = _playerMoveHandler(_moveVariants);
             
             if (playerChoice == MoveVariants.Length)
@@ -61,7 +62,6 @@ internal class GameContext
                 this.PlayerMoveEnded?.Invoke(this, new PlayerMoveEndedEventArgs(MoveVariants[playerChoice]));
                 roundResult = ChoiceComparer.Compare(pcChoice, playerChoice, MoveVariants.Length);
             }
-
 
             this.RoundEnded?.Invoke(this, new RoundEndedEventArgs(roundResult, signResult.SecretKey, MoveVariants[pcChoice]));
         } while (roundResult == RoundResults.Draw);

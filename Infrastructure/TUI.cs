@@ -1,4 +1,5 @@
-﻿
+﻿using Spectre.Console;
+using System.Linq;
 using RPSGame.Models;
 
 namespace RPSGame.Infrastructure;
@@ -79,43 +80,59 @@ internal static class TUI
 
     internal static int PrintPlayerMoveSelectionDialog(string[] moveVariants)
     {
-        Console.WriteLine("Available moves:");
-
-        for (int i = 0; i <  moveVariants.Length; i++)
-        {
-            Console.WriteLine($"{i + 1} - {moveVariants[i]}");
-        }
-
-        Console.WriteLine($"{moveVariants.Length + 1} - Exit" +
-                          $"\n? - Help");
-
-        int choice = 0;
+        string[] items = [ ..moveVariants, "Exit", "Help" ];
+        int choice = -1;
 
         do
         {
-            Console.Write("Make your choice: ");
-            string input = Console.ReadLine();
+            var selectedItem = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Make your choice!")
+                    .MoreChoicesText("[grey](Move up and down to reveal more variants)[/]")
+                    .AddChoices(items));
 
-            if (input == "?")
+            choice = items.IndexOf(selectedItem);
+
+            if (choice == items.Length - 1)
             {
                 TUI.PrintHelpMessage(moveVariants);
-                choice = 0;
-                continue;
+                choice = -1;
             }
-            else if (!int.TryParse(input, out choice) ||
-                choice < 1 ||
-                choice > moveVariants.Length + 1)
-            {
-                Console.WriteLine("You entered something wrong!");
-                choice = 0;
-            }
-        } while (choice == 0);
+        } while (choice == -1);
 
-        return  choice - 1;
+        return  choice;
     }
 
     private static void PrintHelpMessage(string[] moveVariants)
     {
-        throw new NotImplementedException();
+        var table = new Table();
+        table.Border = TableBorder.Ascii2;
+
+        table.AddColumn("PC\\User");
+        foreach (var item in moveVariants)
+            table.AddColumn(item);
+
+        foreach (var item in moveVariants)
+        {
+            List<string> items = moveVariants
+                .Select(v => 
+                    ChoiceComparer.Compare(moveVariants.IndexOf(item), moveVariants.IndexOf(v), moveVariants.Length))
+                .Select(r => r switch {
+                    RoundResults.PCWin => "Win",
+                    RoundResults.PlayerWin => "Lose",
+                    RoundResults.Draw => "Draw",
+                    _ => throw new ArgumentException() })
+                .ToList();
+
+            items.Insert(0, item);
+
+            table.AddRow(items.Select(t => new Markup(t)));
+        }
+
+        AnsiConsole.Write(table);
     }
+
+    private static int IndexOf<T>(this T[] items, T item) => 
+        items.ToList().IndexOf(item);
+
 }
